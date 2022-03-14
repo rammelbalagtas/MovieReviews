@@ -9,6 +9,7 @@ import UIKit
 
 class MovieCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var movieImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

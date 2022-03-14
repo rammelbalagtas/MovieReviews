@@ -9,20 +9,35 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
+    var movieList = [MovieItem]()
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func switchMovieCategory(_ sender: UISegmentedControl) {
+        var endpoint: String
         switch sender.selectedSegmentIndex {
         case 0:
-            APIHelper.fetch(endpoint: "/movie/popular", parameters: ["page": "1"])
+            endpoint = "/movie/popular"
         case 1:
-            APIHelper.fetch(endpoint: "/movie/now_playing", parameters: ["page": "1"])
+            endpoint = "/movie/now_playing"
         case 2:
-            APIHelper.fetch(endpoint: "/movie/top_rated", parameters: ["page": "1"])
+            endpoint = "/movie/top_rated"
         case 3:
-            APIHelper.fetch(endpoint: "/movie/upcoming", parameters: ["page": "1"])
+            endpoint = "/movie/upcoming"
         default:
-            return
+            endpoint = "/movie/popular"
+        }
+        fetchMovieList(endpoint: endpoint, parameters: ["page": "1"])
+        { response in
+            switch response {
+            case .success(let data):
+                self.movieList = data
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -30,7 +45,18 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         
         // Default selection
-        APIHelper.fetch(endpoint: "/movie/popular", parameters: ["page": "1"])
+        fetchMovieList(endpoint: "/movie/popular", parameters: ["page": "1"])
+        { response in
+            switch response {
+            case .success(let data):
+                self.movieList = data
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
         
         // Register nib for the UI of the collection view cell
         registerNib()
@@ -58,12 +84,25 @@ extension HomeViewController: UICollectionViewDataSource{
     
     //collection view cells count
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1000 //dummy count
+        movieList.count
     }
     
     //data per collection view cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.ReuseIdentifier.movieCollectionCell, for: indexPath) as? MovieCollectionViewCell {
+            
+            let movie = movieList[indexPath.row]
+            ImageAPI.fetchMovieImage(posterPath: movie.posterPath) { response in
+                switch response {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        cell.movieImage.image = data
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+            
             return cell
         }
         return UICollectionViewCell()

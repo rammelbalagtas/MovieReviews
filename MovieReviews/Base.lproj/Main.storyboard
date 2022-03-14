@@ -12,7 +12,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="V9p-qt-QHd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hng-Nh-ewu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Ncg-1G-qmL" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Ueh-jo-gnp"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Gs-Tc-D6S">
@@ -26,6 +25,7 @@
                         <segue destination="fSh-YJ-Cx2" kind="relationship" relationship="viewControllers" id="t8g-pX-jiO"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hng-Nh-ewu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1329" y="388"/>
         </scene>
@@ -95,17 +95,17 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="613"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ImU-eL-djb">
-                                                    <size key="itemSize" width="90" height="120"/>
+                                                    <size key="itemSize" width="100" height="150"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hU8-cj-6Qs" customClass="MovieCollectionViewCell" customModule="MovieReviews" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rUG-NB-uAh">
-                                                            <rect key="frame" x="0.0" y="0.0" width="90" height="120"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                         </collectionViewCellContentView>
                                                     </collectionViewCell>
