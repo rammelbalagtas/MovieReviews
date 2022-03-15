@@ -128,11 +128,43 @@
                     <navigationItem key="navigationItem" title="Movies" id="0Xg-ks-0pr"/>
                     <connections>
                         <outlet property="collectionView" destination="PQa-wD-bHd" id="rnD-WQ-5XH"/>
+                        <segue destination="OeV-XI-j4p" kind="show" identifier="showMovieDetailSegue" id="fkJ-pk-LBq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="835" y="-265"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="Em6-Lu-J8g">
+            <objects>
+                <viewController id="OeV-XI-j4p" customClass="MovieDetailViewController" customModule="MovieReviews" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="68r-gV-caw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BdG-Pp-oPO">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="XLY-3E-Qn7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="BdG-Pp-oPO" firstAttribute="leading" secondItem="XLY-3E-Qn7" secondAttribute="leading" id="ZeG-ET-UVN"/>
+                            <constraint firstItem="XLY-3E-Qn7" firstAttribute="trailing" secondItem="BdG-Pp-oPO" secondAttribute="trailing" id="ZoM-CK-dDA"/>
+                            <constraint firstItem="BdG-Pp-oPO" firstAttribute="top" secondItem="XLY-3E-Qn7" secondAttribute="top" id="fHE-77-z6Y"/>
+                            <constraint firstItem="XLY-3E-Qn7" firstAttribute="bottom" secondItem="BdG-Pp-oPO" secondAttribute="bottom" id="hbf-0X-qYi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="5qn-9J-2Rb"/>
+                    <connections>
+                        <outlet property="tableView" destination="BdG-Pp-oPO" id="FXl-A5-y4h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PVX-uc-4TP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700.0000000000002" y="-265.17857142857144"/>
         </scene>
         <!--Watchlist-->
         <scene sceneID="GMt-7a-rSf">

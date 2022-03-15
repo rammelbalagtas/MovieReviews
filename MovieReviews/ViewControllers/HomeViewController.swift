@@ -9,7 +9,7 @@ import UIKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
-    var movieList = [MovieItem]()
+    var movieList = [MovieListItem]()
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -68,14 +68,19 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     
     //Register nib for collection view and table view cells
     func registerNib() {
-        
         //Register nib for collection view
         let nib = UINib(nibName: Constants.NibName.movieCollectionViewCell, bundle: nil)
         collectionView?.register(nib, forCellWithReuseIdentifier: Constants.ReuseIdentifier.movieCollectionCell)
-        if let flowLayout = self.collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 90, height: 120)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showMovieDetailSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dst = segue.destination as? MovieDetailViewController {
+            dst.movieId = movieList[(collectionView.indexPathsForSelectedItems?[0].row)!].id
         }
-        
     }
 
 }
