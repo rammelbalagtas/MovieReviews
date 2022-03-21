@@ -12,7 +12,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     var movieId: Int!
     var movie: MovieDetail?
     var movieCastList: [MovieCast]?
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -77,20 +77,37 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 450
+        } else if indexPath.section == 2 {
+            return 70
         }
         return tableView.rowHeight
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    //to make the rows not selected
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
     }
-    */
-
+    
+    //handler method for the double tap
+    @objc func imageDoubleTapped() {
+        let alertController = UIAlertController(title: "", message: "Movie added to watchlist/favorites", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+            //save to database
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion:nil)
+    }
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension MovieDetailViewController: UITableViewDataSource {
@@ -129,12 +146,15 @@ extension MovieDetailViewController: UITableViewDataSource {
             guard
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ReuseIdentifier.movieHeaderCell, for: indexPath) as? MovieHeaderTableViewCell
             else{preconditionFailure("unable to dequeue cell")}
+            cell.movieDescriptionLabel.text = self.movie!.overview
             ImageAPI.fetchMovieImage(posterPath: movie.posterPath) { response in
                 switch response {
                 case .success(let data):
                     DispatchQueue.main.async {
                         cell.movieImage.image = data
-                        cell.movieDescriptionLabel.text = self.movie!.overview
+                        let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageDoubleTapped))
+                        tap.numberOfTapsRequired = 2
+                        cell.movieImage.addGestureRecognizer(tap)
                     }
                 case .failure(let error):
                     print(error)
