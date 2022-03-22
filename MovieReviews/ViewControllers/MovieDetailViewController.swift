@@ -24,6 +24,9 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
         
         registerNib() //register nib for table view cells
         
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
+        
         //fetch movie data using movie id
         let movieEndpoint = "/movie/\(movieId!)"
         fetchMovie(endpoint: movieEndpoint, parameters: [:])
@@ -74,14 +77,14 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 450
-        } else if indexPath.section == 2 {
-            return 70
-        }
-        return tableView.rowHeight
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == 0 {
+//            return 450
+//        } else if indexPath.section == 2 {
+//            return 70
+//        }
+//        return tableView.rowHeight
+//    }
     
     //to make the rows not selected
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

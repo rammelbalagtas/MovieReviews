@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ncg-1G-qmL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ncg-1G-qmL">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -191,21 +191,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watchlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5s-vV-chX">
-                                <rect key="frame" x="171.5" y="437.5" width="71" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NVe-Rv-WoQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KKw-uZ-otp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="z5s-vV-chX" firstAttribute="centerX" secondItem="Wlx-ZA-q5B" secondAttribute="centerX" id="VPz-vt-Lao"/>
-                            <constraint firstItem="z5s-vV-chX" firstAttribute="centerY" secondItem="Wlx-ZA-q5B" secondAttribute="centerY" id="o6G-oJ-BuA"/>
+                            <constraint firstItem="NVe-Rv-WoQ" firstAttribute="leading" secondItem="KKw-uZ-otp" secondAttribute="leading" id="AcF-UD-KL6"/>
+                            <constraint firstItem="KKw-uZ-otp" firstAttribute="trailing" secondItem="NVe-Rv-WoQ" secondAttribute="trailing" id="GrF-6v-dim"/>
+                            <constraint firstItem="KKw-uZ-otp" firstAttribute="bottom" secondItem="NVe-Rv-WoQ" secondAttribute="bottom" id="JDb-3C-Pvs"/>
+                            <constraint firstItem="NVe-Rv-WoQ" firstAttribute="top" secondItem="KKw-uZ-otp" secondAttribute="top" id="aUU-J4-9Dr"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="38x-RP-VYc"/>
+                    <connections>
+                        <outlet property="tableView" destination="NVe-Rv-WoQ" id="rhs-c6-D1T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcj-VI-QPO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

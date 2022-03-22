@@ -15,6 +15,7 @@ struct Constants {
         static let movieHeaderCell = "movieheader"
         static let movieDetailCell = "moviedetail"
         static let movieCastCell = "moviecast"
+        static let watchListCell = "watchlist"
     }
     
     //custom nib for table view/collection view cells
@@ -23,5 +24,6 @@ struct Constants {
         static let movieHeaderTableViewCell = "MovieHeaderTableViewCell"
         static let movieDetailTableViewCell = "MovieDetailTableViewCell"
         static let movieCastTableViewCell = "MovieCastTableViewCell"
+        static let watchListTableViewCell = "WatchListTableViewCell"
     }
 }

@@ -18,10 +18,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="vyx-2G-t7O">
-                        <rect key="frame" x="20" y="8" width="270" height="50"/>
+                        <rect key="frame" x="20" y="8" width="270" height="100"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="questionmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Puh-27-TYT">
-                                <rect key="frame" x="0.0" y="1" width="50" height="48"/>
+                                <rect key="frame" x="0.0" y="1" width="50" height="98"/>
                                 <color key="tintColor" systemColor="placeholderTextColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="gX2-KY-ssY"/>
@@ -29,16 +29,16 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="QKr-WX-v0x">
-                                <rect key="frame" x="72" y="0.0" width="198" height="50"/>
+                                <rect key="frame" x="72" y="0.0" width="198" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGb-fP-8ce">
-                                        <rect key="frame" x="0.0" y="0.0" width="93" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NuJ-a3-LKO">
-                                        <rect key="frame" x="0.0" y="25" width="123.5" height="25"/>
+                                        <rect key="frame" x="0.0" y="50" width="123.5" height="50"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="15"/>
                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                         <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="vyx-2G-t7O" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="H3V-C4-XhD"/>
+                    <constraint firstAttribute="bottom" secondItem="vyx-2G-t7O" secondAttribute="bottom" constant="8" id="Jes-Ss-rHx"/>
                     <constraint firstAttribute="trailing" secondItem="vyx-2G-t7O" secondAttribute="trailing" constant="10" id="aE2-pa-4Hm"/>
                     <constraint firstItem="vyx-2G-t7O" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="p4D-NW-yCu"/>
                 </constraints>
