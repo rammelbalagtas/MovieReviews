@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import CoreData
 
 class WatchListViewController: UIViewController, UITableViewDelegate {
-
+    
+    var persistentContainer: NSPersistentContainer!
+    var watchList = [Movie]()
+    
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +25,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
         
         registerNib() //register nib for table view cells
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view
+        fetchData()
     }
     
     //Register nib for table view cells
@@ -41,9 +46,17 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    private func fetchData() {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        let moc = persistentContainer.viewContext
+        guard
+            let results = try? moc.fetch(request)
+        else {return}
+        watchList = results
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -67,9 +80,9 @@ extension WatchListViewController: UITableViewDataSource {
     // number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 5
+            return watchList.count
         } else {
-            return 5
+            return watchList.count
         }
     }
     
@@ -79,9 +92,10 @@ extension WatchListViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ReuseIdentifier.watchListCell, for: indexPath) as? WatchListTableViewCell
         else{preconditionFailure("unable to dequeue cell")}
         
-        cell.titleLabel.text = "This is the movie title"
-        cell.yearLabel.text = "2021"
-        
+        let movie = watchList[indexPath.row]
+        cell.titleLabel.text = movie.title
+        cell.yearLabel.text = movie.year
+        cell.movieImageView.image = UIImage(data: movie.image!)
         return cell
         
     }

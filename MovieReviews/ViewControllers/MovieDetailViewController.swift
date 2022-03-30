@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import CoreData
 
 class MovieDetailViewController: UIViewController, UITableViewDelegate {
     
     var movieId: Int!
     var movie: MovieDetail?
     var movieCastList: [MovieCast]?
+    var persistentContainer: NSPersistentContainer!
+    var movieImage: UIImage?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -95,7 +98,20 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     @objc func imageDoubleTapped() {
         let alertController = UIAlertController(title: "", message: "Movie added to watchlist/favorites", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-            //save to database
+            //save to coredata
+            let moc = self.persistentContainer.viewContext
+            let movie = Movie(context: moc)
+            movie.id = Int32(truncatingIfNeeded: self.movie!.id)
+            movie.title = self.movie?.title
+            movie.image = self.movieImage?.jpegData(compressionQuality: 1.0)
+            movie.year = String(self.movie!.releaseDate.prefix(4))
+            moc.perform {
+                do {
+                    try moc.save()
+                } catch {
+                    moc.rollback()
+                }
+            }
         }
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion:nil)
@@ -155,6 +171,7 @@ extension MovieDetailViewController: UITableViewDataSource {
                 case .success(let data):
                     DispatchQueue.main.async {
                         cell.movieImage.image = data
+                        self.movieImage = data
                         let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageDoubleTapped))
                         tap.numberOfTapsRequired = 2
                         cell.movieImage.addGestureRecognizer(tap)

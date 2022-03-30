@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
     var movieList = [MovieListItem]()
+    var persistentContainer: NSPersistentContainer!
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -80,6 +82,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dst = segue.destination as? MovieDetailViewController {
             dst.movieId = movieList[(collectionView.indexPathsForSelectedItems?[0].row)!].id
+            dst.persistentContainer = persistentContainer
         }
     }
 
