@@ -25,7 +25,11 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
         
         registerNib() //register nib for table view cells
 
-        // Do any additional setup after loading the view
+//        // Do any additional setup after loading the view
+//        fetchData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         fetchData()
     }
     

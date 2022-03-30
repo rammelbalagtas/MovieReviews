@@ -80,15 +80,6 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.section == 0 {
-//            return 450
-//        } else if indexPath.section == 2 {
-//            return 70
-//        }
-//        return tableView.rowHeight
-//    }
-    
     //to make the rows not selected
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         return nil
@@ -96,25 +87,65 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     
     //handler method for the double tap
     @objc func imageDoubleTapped() {
-        let alertController = UIAlertController(title: "", message: "Movie added to watchlist/favorites", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
-            //save to coredata
-            let moc = self.persistentContainer.viewContext
+        
+        var message = ""
+        let movieExist = updateDB()
+        if movieExist {
+            message = "Movie removed watchlist/favorites"
+        } else {
+            message = "Movie added to watchlist/favorites"
+        }
+        
+        let alertController = UIAlertController(title: "", message: message , preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion:nil)
+    }
+    
+    private func fetchMovieFromDB() -> Movie? {
+        let request = Movie.fetchRequest() as NSFetchRequest<Movie>
+        let id = Int32(truncatingIfNeeded: movie!.id)
+        let predicate = NSPredicate(format: "abs(id) == %d", id)
+        
+        request.predicate = predicate
+        let moc = persistentContainer.viewContext
+        guard
+            let results = try? moc.fetch(request)
+        else {return nil}
+        if results.isEmpty {
+            return nil
+        } else {
+            return results[0]
+        }
+    }
+    
+    //add or remove from watchlist
+    private func updateDB() -> Bool {
+        
+        var movieExist = true
+        
+        let moc = self.persistentContainer.viewContext
+        if let movie = fetchMovieFromDB() {
+            //remove from watchlist
+            moc.delete(movie)
+        } else {
+            //add to watchlist
             let movie = Movie(context: moc)
             movie.id = Int32(truncatingIfNeeded: self.movie!.id)
             movie.title = self.movie?.title
             movie.image = self.movieImage?.jpegData(compressionQuality: 1.0)
             movie.year = String(self.movie!.releaseDate.prefix(4))
-            moc.perform {
-                do {
-                    try moc.save()
-                } catch {
-                    moc.rollback()
-                }
+            movieExist = false
+        }
+        
+        moc.perform {
+            do {
+                try moc.save()
+            } catch {
+                moc.rollback()
             }
         }
-        alertController.addAction(okAction)
-        self.present(alertController, animated: true, completion:nil)
+        return movieExist
     }
     
     /*
