@@ -135,7 +135,7 @@
             </objects>
             <point key="canvasLocation" x="835" y="-265"/>
         </scene>
-        <!--Movie Detail View Controller-->
+        <!--Movie Detail-->
         <scene sceneID="Em6-Lu-J8g">
             <objects>
                 <viewController id="OeV-XI-j4p" customClass="MovieDetailViewController" customModule="MovieReviews" customModuleProvider="target" sceneMemberID="viewController">
@@ -157,7 +157,7 @@
                             <constraint firstItem="XLY-3E-Qn7" firstAttribute="bottom" secondItem="BdG-Pp-oPO" secondAttribute="bottom" id="hbf-0X-qYi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="5qn-9J-2Rb"/>
+                    <navigationItem key="navigationItem" title="Movie Detail" id="5qn-9J-2Rb"/>
                     <connections>
                         <outlet property="tableView" destination="BdG-Pp-oPO" id="FXl-A5-y4h"/>
                     </connections>

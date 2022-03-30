@@ -72,7 +72,11 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dst = segue.destination as? MovieDetailViewController {
-            dst.movieId = Int(watchList[(tableView.indexPathForSelectedRow?.row)!].id)
+            if tableView.indexPathForSelectedRow?.section == 0 {
+                dst.movieId = Int(inProgressMovies[(tableView.indexPathForSelectedRow?.row)!].id)
+            } else {
+                dst.movieId = Int(completedMovies[(tableView.indexPathForSelectedRow?.row)!].id)
+            }
             dst.persistentContainer = persistentContainer
         }
     }
@@ -112,6 +116,10 @@ extension WatchListViewController: UITableViewDataSource {
         cell.movieImageView.image = UIImage(data: movie.image!)
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showMovieDetailSegue", sender: self)
     }
     
 }
