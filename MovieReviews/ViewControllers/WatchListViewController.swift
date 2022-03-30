@@ -12,6 +12,8 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
     
     var persistentContainer: NSPersistentContainer!
     var watchList = [Movie]()
+    var inProgressMovies = [Movie]()
+    var completedMovies = [Movie]()
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -57,20 +59,23 @@ class WatchListViewController: UIViewController, UITableViewDelegate {
             let results = try? moc.fetch(request)
         else {return}
         watchList = results
+        inProgressMovies = results.filter{ $0.isCompleted == false}
+        completedMovies = results.filter{ $0.isCompleted == true}
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let dst = segue.destination as? MovieDetailViewController {
+            dst.movieId = Int(watchList[(tableView.indexPathForSelectedRow?.row)!].id)
+            dst.persistentContainer = persistentContainer
+        }
     }
-    */
 
 }
 
@@ -84,9 +89,9 @@ extension WatchListViewController: UITableViewDataSource {
     // number of rows
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return watchList.count
+            return inProgressMovies.count
         } else {
-            return watchList.count
+            return completedMovies.count
         }
     }
     
@@ -96,7 +101,12 @@ extension WatchListViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ReuseIdentifier.watchListCell, for: indexPath) as? WatchListTableViewCell
         else{preconditionFailure("unable to dequeue cell")}
         
-        let movie = watchList[indexPath.row]
+        var movie: Movie!
+        if indexPath.section == 0 {
+            movie = inProgressMovies[indexPath.row]
+        } else {
+            movie = completedMovies[indexPath.row]
+        }
         cell.titleLabel.text = movie.title
         cell.yearLabel.text = movie.year
         cell.movieImageView.image = UIImage(data: movie.image!)

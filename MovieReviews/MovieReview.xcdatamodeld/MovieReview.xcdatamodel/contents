@@ -3,10 +3,11 @@
     <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="isCompleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Movie" positionX="-54" positionY="-9" width="128" height="89"/>
+        <element name="Movie" positionX="-54" positionY="-9" width="128" height="104"/>
     </elements>
 </model>

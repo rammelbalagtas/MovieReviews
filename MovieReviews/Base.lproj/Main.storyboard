@@ -183,7 +183,7 @@
             </objects>
             <point key="canvasLocation" x="67" y="404"/>
         </scene>
-        <!--Watch List View Controller-->
+        <!--Watchlist-->
         <scene sceneID="WhF-8J-djD">
             <objects>
                 <viewController id="AQ1-ig-I2W" customClass="WatchListViewController" customModule="MovieReviews" customModuleProvider="target" sceneMemberID="viewController">
@@ -205,9 +205,10 @@
                             <constraint firstItem="NVe-Rv-WoQ" firstAttribute="top" secondItem="KKw-uZ-otp" secondAttribute="top" id="aUU-J4-9Dr"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="38x-RP-VYc"/>
+                    <navigationItem key="navigationItem" title="Watchlist" id="38x-RP-VYc"/>
                     <connections>
                         <outlet property="tableView" destination="NVe-Rv-WoQ" id="rhs-c6-D1T"/>
+                        <segue destination="OeV-XI-j4p" kind="show" identifier="showMovieDetailSegue" id="Tbo-yO-z5W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcj-VI-QPO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -231,7 +232,7 @@
             </objects>
             <point key="canvasLocation" x="100" y="1104"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="0bA-G2-tKi">
             <objects>
                 <viewController id="lTa-Ly-DuP" customClass="ProfileViewController" customModule="MovieReviews" customModuleProvider="target" sceneMemberID="viewController">
@@ -253,13 +254,16 @@
                             <constraint firstItem="Rkf-5V-j0q" firstAttribute="centerY" secondItem="BzG-9V-kDB" secondAttribute="centerY" id="skd-5t-Roe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ttw-Rq-8Yd"/>
+                    <navigationItem key="navigationItem" title="Profile" id="ttw-Rq-8Yd"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nfq-7G-l1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="856.52173913043487" y="1102.9017857142856"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Tbo-yO-z5W"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
