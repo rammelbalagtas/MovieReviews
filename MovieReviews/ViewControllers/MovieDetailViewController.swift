@@ -89,7 +89,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     @objc func imageDoubleTapped() {
         
         var message = ""
-        let movieExist = updateDB()
+        let movieExist = updateWatchList()
         if movieExist {
             message = "Movie removed watchlist/favorites"
         } else {
@@ -120,7 +120,7 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
     }
     
     //add or remove from watchlist
-    private func updateDB() -> Bool {
+    private func updateWatchList() -> Bool {
         
         var movieExist = true
         
@@ -148,19 +148,21 @@ class MovieDetailViewController: UIViewController, UITableViewDelegate {
         return movieExist
     }
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+         if let dst = segue.destination as? MovieReviewViewController {
+             dst.persistentContainer = persistentContainer
+             dst.movieId = movieId
+         }
      }
-     */
+     
     
 }
 
-extension MovieDetailViewController: UITableViewDataSource {
+extension MovieDetailViewController: UITableViewDataSource, MovieHeaderTableCellDelegate {
     
     // number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -206,6 +208,15 @@ extension MovieDetailViewController: UITableViewDataSource {
                         let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageDoubleTapped))
                         tap.numberOfTapsRequired = 2
                         cell.movieImage.addGestureRecognizer(tap)
+                        cell.delegate = self
+                        
+                        //hide the button if movie is not added to watchlist
+                        if let _ = self.fetchMovieFromDB() {
+                            cell.addReviewsButton.alpha = 1
+                        } else {
+                            cell.addReviewsButton.alpha = 0
+                        }
+                        
                     }
                 case .failure(let error):
                     print(error)
@@ -264,6 +275,10 @@ extension MovieDetailViewController: UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+    }
+    
+    func displayReviewScreen() {
+        performSegue(withIdentifier: "showMovieReview", sender: self)
     }
     
     

@@ -160,11 +160,88 @@
                     <navigationItem key="navigationItem" title="Movie Detail" id="5qn-9J-2Rb"/>
                     <connections>
                         <outlet property="tableView" destination="BdG-Pp-oPO" id="FXl-A5-y4h"/>
+                        <segue destination="6Ms-Y9-lzY" kind="show" identifier="showMovieReview" id="AHw-JK-IPh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PVX-uc-4TP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1700.0000000000002" y="-265.17857142857144"/>
+        </scene>
+        <!--Reviews-->
+        <scene sceneID="9e8-SC-4Fk">
+            <objects>
+                <viewController id="6Ms-Y9-lzY" customClass="MovieReviewViewController" customModule="MovieReviews" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xtp-NJ-d1H">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ErE-dh-g8M">
+                                <rect key="frame" x="8" y="96" width="398" height="241"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1Zz-FH-IJz">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="200"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="5qN-5d-JXz">
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="xKM-bC-k26"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="E8t-3i-LnY">
+                                        <rect key="frame" x="0.0" y="210" width="398" height="31"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6BI-pc-RML">
+                                                <rect key="frame" x="0.0" y="0.0" width="160.5" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" image="doc.fill" catalog="system" title="Save" imagePadding="5"/>
+                                                <connections>
+                                                    <action selector="saveAction:" destination="6Ms-Y9-lzY" eventType="touchUpInside" id="72B-SZ-953"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qr-Ed-Y4r">
+                                                <rect key="frame" x="168.5" y="0.0" width="229.5" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" image="checkmark.circle.fill" catalog="system" title="Markas Complete" imagePadding="5">
+                                                    <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="markAsCompleteAction:" destination="6Ms-Y9-lzY" eventType="touchUpInside" id="DXn-IM-yXh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="6BI-pc-RML" firstAttribute="width" secondItem="2Qr-Ed-Y4r" secondAttribute="width" multiplier="0.7" id="2xh-7h-Kxq"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="E8t-3i-LnY" secondAttribute="trailing" id="NpF-sP-A1F"/>
+                                    <constraint firstItem="E8t-3i-LnY" firstAttribute="leading" secondItem="ErE-dh-g8M" secondAttribute="leading" id="zNM-oX-DQR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o1b-lf-Uc7"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ErE-dh-g8M" firstAttribute="top" secondItem="o1b-lf-Uc7" secondAttribute="top" constant="8" id="HnX-zG-Ips"/>
+                            <constraint firstItem="o1b-lf-Uc7" firstAttribute="trailing" secondItem="ErE-dh-g8M" secondAttribute="trailing" constant="8" id="fEZ-n0-7Vn"/>
+                            <constraint firstItem="ErE-dh-g8M" firstAttribute="leading" secondItem="o1b-lf-Uc7" secondAttribute="leading" constant="8" id="uGJ-Td-NWw"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Reviews" id="cD8-bZ-xt3"/>
+                    <connections>
+                        <outlet property="markAsCompleteBtn" destination="2Qr-Ed-Y4r" id="2dX-J6-2S2"/>
+                        <outlet property="reviewTextView" destination="5qN-5d-JXz" id="jxk-Dc-X2V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ogg-ST-epi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2582.608695652174" y="-259.15178571428572"/>
         </scene>
         <!--Watchlist-->
         <scene sceneID="GMt-7a-rSf">
@@ -265,11 +342,19 @@
         <segue reference="Tbo-yO-z5W"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="doc.fill" catalog="system" width="115" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="person.circle.fill" catalog="system" width="128" height="121"/>
         <image name="tv.inset.filled" catalog="system" width="128" height="97"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

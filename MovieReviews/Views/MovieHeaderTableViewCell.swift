@@ -7,10 +7,22 @@
 
 import UIKit
 
-class MovieHeaderTableViewCell: UITableViewCell {
+protocol MovieHeaderTableCellDelegate {
+    func displayReviewScreen()
+}
 
+class MovieHeaderTableViewCell: UITableViewCell {
+    
+    var delegate: MovieHeaderTableCellDelegate?
+
+    @IBOutlet weak var tapInstructionLabel: UILabel!
     @IBOutlet weak var movieImage: UIImageView!
     @IBOutlet weak var movieDescriptionLabel: UILabel!
+    @IBOutlet weak var addReviewsButton: UIButton!
+    
+    @IBAction func addReviewsAction(_ sender: UIButton) {
+        delegate?.displayReviewScreen()
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
