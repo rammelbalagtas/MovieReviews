@@ -24,7 +24,8 @@ class MovieReviewViewController: UIViewController {
     }
     
     @IBAction func markAsCompleteAction(_ sender: UIButton) {
-        movie!.isCompleted = true
+        movie!.isCompleted.toggle()
+        setCompleteButton()
         updateMovie(movie: movie!)
         displayMessage(message: "Movie has been marked as completed")
     }
@@ -34,6 +35,7 @@ class MovieReviewViewController: UIViewController {
         //fetch movie
         movie = fetchMovieFromDB(movieId: movieId)
         reviewTextView.text = movie!.review
+        setCompleteButton()
         
         //add border to textview
         let borderColor : UIColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
@@ -75,6 +77,14 @@ class MovieReviewViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default)
         alertController.addAction(okAction)
         self.present(alertController, animated: true, completion:nil)
+    }
+    
+    private func setCompleteButton() {
+        if movie!.isCompleted {
+            markAsCompleteBtn.setTitle("Mark as Incomplete", for: .normal)
+        } else {
+            markAsCompleteBtn.setTitle("Mark as Complete", for: .normal)
+        }
     }
 
     /*

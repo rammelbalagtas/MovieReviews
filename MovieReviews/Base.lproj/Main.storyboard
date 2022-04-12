@@ -206,7 +206,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qr-Ed-Y4r">
                                                 <rect key="frame" x="168.5" y="0.0" width="229.5" height="31"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" image="checkmark.circle.fill" catalog="system" title="Markas Complete" imagePadding="5">
+                                                <buttonConfiguration key="configuration" style="filled" image="checkmark.circle.fill" catalog="system" title="Mark as Complete" imagePadding="5">
                                                     <color key="baseBackgroundColor" systemColor="systemGreenColor"/>
                                                 </buttonConfiguration>
                                                 <connections>
