@@ -63,9 +63,9 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UHn-Hx-Rbi">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="61"/>
                                                 <subviews>
-                                                    <searchBar contentMode="redraw" placeholder="Search movies by title" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-xK-r5q">
+                                                    <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search movies by title" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ldg-xK-r5q">
                                                         <rect key="frame" x="0.0" y="0.0" width="394" height="61"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                                     </searchBar>
                                                 </subviews>
                                             </stackView>
@@ -128,6 +128,7 @@
                     <navigationItem key="navigationItem" title="Movies" id="0Xg-ks-0pr"/>
                     <connections>
                         <outlet property="collectionView" destination="PQa-wD-bHd" id="rnD-WQ-5XH"/>
+                        <outlet property="searchBar" destination="Ldg-xK-r5q" id="qP2-bC-nGD"/>
                         <segue destination="OeV-XI-j4p" kind="show" identifier="showMovieDetailSegue" id="fkJ-pk-LBq"/>
                     </connections>
                 </viewController>
@@ -445,7 +446,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tbo-yO-z5W"/>
+        <segue reference="fkJ-pk-LBq"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>

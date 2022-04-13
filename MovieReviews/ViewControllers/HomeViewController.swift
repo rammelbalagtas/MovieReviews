@@ -11,8 +11,10 @@ import CoreData
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
     var movieList = [MovieListItem]()
+    var movieListFull = [MovieListItem]()
     var persistentContainer: NSPersistentContainer!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBAction func switchMovieCategory(_ sender: UISegmentedControl) {
@@ -34,6 +36,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             switch response {
             case .success(let data):
                 self.movieList = data
+                self.movieListFull = data
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -46,12 +49,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.searchBar.delegate = self
+        self.definesPresentationContext = false
+        
         // Default selection
         fetchMovieList(endpoint: "/movie/popular", parameters: ["page": "1"])
         { response in
             switch response {
             case .success(let data):
                 self.movieList = data
+                self.movieListFull = data
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -114,6 +121,39 @@ extension HomeViewController: UICollectionViewDataSource{
             return cell
         }
         return UICollectionViewCell()
+    }
+    
+}
+
+extension HomeViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.movieList = self.movieListFull
+        self.searchBar.showsCancelButton = false
+        self.searchBar.endEditing(true)
+        self.dismiss(animated: true, completion: nil)
+        self.collectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text! == ""  {
+            movieList = movieListFull
+            self.collectionView.reloadData()
+        } else {
+            movieList = movieListFull.filter({ (item) -> Bool in
+                return (item.title.localizedCaseInsensitiveContains(String(searchBar.text!)))
+            })
+            self.collectionView.reloadData()
+        }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.collectionView.reloadData()
     }
     
 }
