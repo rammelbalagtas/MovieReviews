@@ -199,27 +199,29 @@ extension MovieDetailViewController: UITableViewDataSource, MovieHeaderTableCell
                 let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ReuseIdentifier.movieHeaderCell, for: indexPath) as? MovieHeaderTableViewCell
             else{preconditionFailure("unable to dequeue cell")}
             cell.movieDescriptionLabel.text = self.movie!.overview
-            ImageAPI.fetchMovieImage(posterPath: movie.posterPath) { response in
-                switch response {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        cell.movieImage.image = data
-                        self.movieImage = data
-                        let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageDoubleTapped))
-                        tap.numberOfTapsRequired = 2
-                        cell.movieImage.addGestureRecognizer(tap)
-                        cell.delegate = self
-                        
-                        //hide the button if movie is not added to watchlist
-                        if let _ = self.fetchMovieFromDB() {
-                            cell.addReviewsButton.alpha = 1
-                        } else {
-                            cell.addReviewsButton.alpha = 0
+            cell.movieImage.image = nil
+            if let posterPath = movie.posterPath {
+                ImageAPI.fetchMovieImage(posterPath: posterPath) { response in
+                    switch response {
+                    case .success(let data):
+                        DispatchQueue.main.async {
+                            cell.movieImage.image = data
+                            self.movieImage = data
+                            let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageDoubleTapped))
+                            tap.numberOfTapsRequired = 2
+                            cell.movieImage.addGestureRecognizer(tap)
+                            cell.delegate = self
+                            //hide the button if movie is not added to watchlist
+                            if let _ = self.fetchMovieFromDB() {
+                                cell.addReviewsButton.alpha = 1
+                            } else {
+                                cell.addReviewsButton.alpha = 0
+                            }
+                            
                         }
-                        
+                    case .failure(let error):
+                        print(error)
                     }
-                case .failure(let error):
-                    print(error)
                 }
             }
             return cell

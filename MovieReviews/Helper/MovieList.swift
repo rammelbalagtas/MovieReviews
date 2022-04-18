@@ -21,7 +21,7 @@ struct MovieListItem : Codable {
     let id: Int
     let title: String
     let voteAverage: Float
-    let posterPath: String
+    let posterPath: String?
 }
 
 enum MovieDetailResult {
@@ -35,7 +35,7 @@ struct MovieDetail : Codable {
     let overview: String
     let releaseDate: String
     let runtime: Int
-    let posterPath: String
+    let posterPath: String?
     let genres: [Genre]
 }
 

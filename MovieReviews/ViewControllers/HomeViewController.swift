@@ -37,6 +37,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             case .success(let data):
                 self.movieList = data
                 self.movieListFull = data
+                self.movieListFull = self.movieList.filter { $0.posterPath != nil }
+                self.movieList = self.movieList.filter { $0.posterPath != nil }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -59,6 +61,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             case .success(let data):
                 self.movieList = data
                 self.movieListFull = data
+                self.movieListFull = self.movieList.filter { $0.posterPath != nil }
+                self.movieList = self.movieList.filter { $0.posterPath != nil }
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -107,17 +111,19 @@ extension HomeViewController: UICollectionViewDataSource{
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.ReuseIdentifier.movieCollectionCell, for: indexPath) as? MovieCollectionViewCell {
             
             let movie = movieList[indexPath.row]
-            ImageAPI.fetchMovieImage(posterPath: movie.posterPath) { response in
-                switch response {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        cell.movieImage.image = data
+            cell.movieImage.image = nil
+            if let posterPath = movie.posterPath {
+                ImageAPI.fetchMovieImage(posterPath: posterPath) { response in
+                    switch response {
+                    case .success(let data):
+                        DispatchQueue.main.async {
+                            cell.movieImage.image = data
+                        }
+                    case .failure(let error):
+                        print(error)
                     }
-                case .failure(let error):
-                    print(error)
                 }
             }
-            
             return cell
         }
         return UICollectionViewCell()
