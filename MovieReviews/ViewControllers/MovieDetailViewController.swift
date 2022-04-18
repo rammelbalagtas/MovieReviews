@@ -175,7 +175,7 @@ extension MovieDetailViewController: UITableViewDataSource, MovieHeaderTableCell
         case 0:
             return 1
         case 1:
-            return 3
+            return 4
         case 2:
             if let movieCastList = movieCastList {
                 return movieCastList.count
@@ -231,12 +231,15 @@ extension MovieDetailViewController: UITableViewDataSource, MovieHeaderTableCell
             else{preconditionFailure("unable to dequeue cell")}
             switch indexPath.row {
             case 0:
+                cell.dataLabel.text = "Title"
+                cell.dataValue.text = movie.title
+            case 1:
                 cell.dataLabel.text = "Release Date"
                 cell.dataValue.text = movie.releaseDate
-            case 1:
+            case 2:
                 cell.dataLabel.text = "Runtime"
                 cell.dataValue.text = String(movie.runtime) + " mins"
-            case 2:
+            case 3:
                 cell.dataLabel.text = "Genre"
                 var genre = [String]()
                 for movieGenre in movie.genres {
