@@ -25,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         homeViewVC.persistentContainer = persistentContainer
         let watchListVC = navVCs[1].topViewController as! WatchListViewController
         watchListVC.persistentContainer = persistentContainer
+        let profileVC = navVCs[2].topViewController as! ProfileViewController
+        profileVC.persistentContainer = persistentContainer
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

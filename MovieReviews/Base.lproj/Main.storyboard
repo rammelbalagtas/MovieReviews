@@ -412,6 +412,9 @@
                                                         </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="Save"/>
+                                                        <connections>
+                                                            <action selector="saveProfileAction:" destination="lTa-Ly-DuP" eventType="touchUpInside" id="iew-KI-EIa"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
